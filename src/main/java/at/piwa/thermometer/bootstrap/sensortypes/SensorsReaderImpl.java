@@ -29,7 +29,7 @@ public class SensorsReaderImpl {
             JAXBContext jaxbContext = JAXBContext.newInstance( SensorConfigurations.class );
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-            File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(sensorConfigurationsOriginalPath)).getFile());
+            File file = new File(sensorConfigurationsOriginalPath);
 
             SensorConfigurations sensorConfigurations = (SensorConfigurations) jaxbUnmarshaller.unmarshal(file);
 
