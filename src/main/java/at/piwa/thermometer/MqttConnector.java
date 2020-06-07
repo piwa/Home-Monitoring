@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.*;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -71,7 +72,7 @@ public class MqttConnector {
     private void openMqttConnection() throws MqttException {
 
         String publisherId = UUID.randomUUID().toString();
-        mqttClient = new MqttClient(mqttUri,publisherId);
+        mqttClient = new MqttClient(mqttUri,publisherId, new MemoryPersistence());
 
         MqttConnectOptions options = new MqttConnectOptions();
         options.setAutomaticReconnect(true);
