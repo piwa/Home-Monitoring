@@ -1,9 +1,7 @@
 package at.piwa.thermometer.bootstrap;
 
 import at.piwa.thermometer.InMemoryCache;
-import at.piwa.thermometer.bootstrap.sensortypes.SensorConfigurations;
 import at.piwa.thermometer.bootstrap.sensortypes.SensorsReaderImpl;
-import at.piwa.thermometer.bootstrap.sensortypes.SensorsWriteImpl;
 import at.piwa.thermometer.domain.Sensor;
 import at.piwa.thermometer.domain.SensorConnection;
 import at.piwa.thermometer.reader.I2cReader;
@@ -27,8 +25,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private SensorsReaderImpl sensorsReader;
-    @Autowired
-    private SensorsWriteImpl sensorsWrite;
     @Autowired
     private InMemoryCache inMemoryCache;
     @Autowired
@@ -54,9 +50,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
                 }
             }
         }
-
-        SensorConfigurations newSensorConfigurations = new SensorConfigurations(inMemoryCache.getSensors());
-        sensorsWrite.writeSensorConfigurations(newSensorConfigurations);
 
         readeTemperatureTask.readTemperatureTask();
 

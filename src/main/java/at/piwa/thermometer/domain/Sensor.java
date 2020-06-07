@@ -1,5 +1,6 @@
 package at.piwa.thermometer.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,8 +19,8 @@ public class Sensor {
     @XmlElement
     private String Id;
 
-    @XmlElement(name = "Name")
-    private String name;
+    @XmlElement(name = "Location")
+    private String location;
 
     @XmlElement(name = "Type")
     private String type;
@@ -32,5 +33,8 @@ public class Sensor {
 
     @XmlElement(name = "HardwareID")
     private String hardwareID;
+
+    @XmlElement(name = "MeasuredEntity")
+    private MeasuredEntity measuredEntity;
 
 }

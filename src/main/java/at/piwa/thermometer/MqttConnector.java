@@ -17,7 +17,10 @@ import java.util.UUID;
 @Slf4j
 public class MqttConnector {
 
-    public static final String TOPIC = "home_monitoring/sensors";
+    @Value("${temperature.mqtt.topic}")
+    private String topic = "home_monitoring/sensors/temperature";
+    @Value("${mqtt.uri.tcp}")
+    private String mqttUri;
 
     private IMqttClient mqttClient;
 
@@ -34,11 +37,10 @@ public class MqttConnector {
                     objectMapper.registerModule(new JodaModule());
                     String payload = objectMapper.writeValueAsString(temperature);
 
-
                     MqttMessage msg = new MqttMessage(payload.getBytes());
                     msg.setQos(0);
                     msg.setRetained(true);
-                    mqttClient.publish(TOPIC,msg);
+                    mqttClient.publish(topic,msg);
                     log.debug("Send temperature done");
                 } catch (JsonProcessingException e) {
                     log.error("Exception", e);
@@ -69,7 +71,7 @@ public class MqttConnector {
     private void openMqttConnection() throws MqttException {
 
         String publisherId = UUID.randomUUID().toString();
-        mqttClient = new MqttClient("tcp://192.168.0.197:1883",publisherId);
+        mqttClient = new MqttClient(mqttUri,publisherId);
 
         MqttConnectOptions options = new MqttConnectOptions();
         options.setAutomaticReconnect(true);

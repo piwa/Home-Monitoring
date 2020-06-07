@@ -12,6 +12,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by philippwaibel on 18/10/2016.
@@ -21,8 +22,6 @@ import java.util.List;
 public class SensorsReaderImpl {
 
     @Value("${sensor.configurations.path}")
-    private String sensorConfigurationsPath;
-    @Value("${sensor.configurations.original.path}")
     private String sensorConfigurationsOriginalPath;
 
     public List<Sensor> readSensorConfigurations() {
@@ -30,15 +29,12 @@ public class SensorsReaderImpl {
             JAXBContext jaxbContext = JAXBContext.newInstance( SensorConfigurations.class );
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-            File file = new File(sensorConfigurationsPath);
-            if(!file.exists()) {
-                file = Paths.get(this.getClass().getClassLoader().getResource(sensorConfigurationsOriginalPath).toURI()).toFile();
-            }
+            File file = new File(Objects.requireNonNull(getClass().getClassLoader().getResource(sensorConfigurationsOriginalPath)).getFile());
 
             SensorConfigurations sensorConfigurations = (SensorConfigurations) jaxbUnmarshaller.unmarshal(file);
 
             return sensorConfigurations.getSensors();
-        } catch (JAXBException | URISyntaxException e) {
+        } catch (JAXBException e) {
             log.error("Exception", e);
         }
 
