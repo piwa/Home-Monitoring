@@ -5,6 +5,7 @@ import at.piwa.thermometer.domain.Sensor;
 import at.piwa.thermometer.domain.SensorConnection;
 import at.piwa.thermometer.domain.Temperature;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,9 @@ public class ReadeTemperatureTask {
     public void readTemperatureTask() {
         log.info("Read Temperatures");
         List<Temperature> temperatureList = new ArrayList<>();
+
+        DateTime measuringTime = DateTime.now();
+
         for (Sensor sensor : inMemoryCache.getSensors()) {
             Temperature temperature = null;
             if (sensor.getSensorConnection() == SensorConnection.I2C) {
@@ -41,14 +45,14 @@ public class ReadeTemperatureTask {
                 temperature = w1Reader.readTemperature(sensor);
             }
 
-            log.info("New temperature reading: " + temperature);
+            temperature.setTime(measuringTime.getMillis());
 
-            if(temperature != null) {
-                temperatureList.add(temperature);
-            }
+            log.info("New temperature reading: " + temperature);
+            temperatureList.add(temperature);
+
         }
 
-        if(temperatureList.size() > 0) {
+        if (temperatureList.size() > 0) {
             mqttConnector.sendTemperature(temperatureList);
         }
 

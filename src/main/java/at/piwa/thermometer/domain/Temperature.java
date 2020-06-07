@@ -12,6 +12,9 @@ import javax.xml.bind.annotation.XmlElement;
 @Data
 public class Temperature {
 
+    @JsonProperty("time")
+    private long time;
+
     @JsonProperty("measured_entity")
     private MeasuredEntity measuredEntity;
 
