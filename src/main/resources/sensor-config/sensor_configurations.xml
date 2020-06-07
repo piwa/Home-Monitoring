@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SensorConfigurations>
     <Sensor>
+        <Id>1</Id>
         <Description>Office I2C</Description>
         <Type>I2C Temperature Sensor</Type>
         <Location>Office LEGO Regal</Location>
@@ -9,6 +10,7 @@
         <HardwareID>0x48</HardwareID>
     </Sensor>
     <Sensor>
+        <Id>2</Id>
         <Description>Office Wire 1</Description>
         <Type>Wire 1 Temperature Sensor</Type>
         <Location>Office LEGO Regal</Location>

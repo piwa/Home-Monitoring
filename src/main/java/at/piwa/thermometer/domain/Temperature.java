@@ -15,6 +15,9 @@ public class Temperature {
     @JsonProperty("measured_entity")
     private MeasuredEntity measuredEntity;
 
+    @JsonProperty("sensor_id")
+    private String sensorId;
+
     @JsonProperty("sensor_type")
     private String sensorType;
 
@@ -28,6 +31,7 @@ public class Temperature {
     private double temperature;
 
     public void setSensor(Sensor sensor) {
+        this.sensorId = sensor.getId();
         this.measuredEntity = sensor.getMeasuredEntity();
         this.sensorType = sensor.getType();
         this.location = sensor.getLocation();
