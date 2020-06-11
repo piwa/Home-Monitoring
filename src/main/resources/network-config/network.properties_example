@@ -1,0 +1,4 @@
+
+modem.ip = <IP Address>
+modem.password = <Web UI Password>
+modem.rd.prefix = <Some weard MD5 Value (can be found by using the Web UI)>
