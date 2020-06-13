@@ -16,6 +16,9 @@ public class OpenWeatherData {
     @JsonProperty("measured_entity")
     private MeasuredEntity measuredEntity;
 
+    @JsonProperty("location")
+    private String location;
+
     @JsonProperty("value")
     private double temperature;
 

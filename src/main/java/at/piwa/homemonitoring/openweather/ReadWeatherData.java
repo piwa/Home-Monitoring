@@ -31,7 +31,6 @@ public class ReadWeatherData {
 
         if (queryOpenWeatherApi) {
             try {
-                // declaring object of "OWM" class
                 OWM owm = new OWM(apiKey);
                 owm.setUnit(OWM.Unit.METRIC);
 
@@ -43,6 +42,7 @@ public class ReadWeatherData {
                     OpenWeatherData openWeatherData = new OpenWeatherData();
                     openWeatherData.setMeasuredEntity(MeasuredEntity.Temperature);
                     openWeatherData.setTemperature(cwd.getMainData().getTemp());
+                    openWeatherData.setLocation("OpenWeater " + city + " " + country);
 
                     mqttConnectorOpenWeather.sendOpenWeatherData(openWeatherData);
                 }
