@@ -42,6 +42,7 @@ public class ReadWeatherData {
                     OpenWeatherData openWeatherData = new OpenWeatherData();
                     openWeatherData.setMeasuredEntity(MeasuredEntity.Temperature);
                     openWeatherData.setTemperature(cwd.getMainData().getTemp());
+                    openWeatherData.setSensorId("0");
                     openWeatherData.setLocation("OpenWeater " + city + " " + country);
 
                     mqttConnectorOpenWeather.sendOpenWeatherData(openWeatherData);
