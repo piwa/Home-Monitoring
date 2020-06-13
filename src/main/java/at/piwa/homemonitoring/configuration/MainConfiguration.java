@@ -10,6 +10,7 @@ import org.springframework.context.annotation.PropertySources;
 @PropertySources({
         @PropertySource("classpath:application.properties"),
         @PropertySource("classpath:network-config/network.properties"),
+        @PropertySource("classpath:openweather-config/openweather.properties"),
         @PropertySource("classpath:sensor-config/sensor.properties")
 })
 public class MainConfiguration {

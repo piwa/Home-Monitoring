@@ -28,3 +28,4 @@ hs_err_pid*
 sensor.properties
 network.properties
 target
+openweather.properties

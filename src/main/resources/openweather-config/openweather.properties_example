@@ -1,0 +1,4 @@
+
+openweather.api.key = <OpenWeather API Key>
+openweather.city = <City>
+openweather.country = <Country>

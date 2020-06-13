@@ -1,43 +1,37 @@
-package at.piwa.homemonitoring.network;
+package at.piwa.homemonitoring.openweather;
 
 import at.piwa.homemonitoring.MqttConnector;
 import at.piwa.homemonitoring.network.domain.NetworkStats;
-import at.piwa.homemonitoring.temperature.domain.Temperature;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Slf4j
 @Component
-public class MqttConnectorNetworkStats extends MqttConnector {
+public class MqttConnectorOpenWeather  extends MqttConnector {
 
-    @Value("${networkstats.mqtt.topic}")
-    private String networkStatsTopic = "home_monitoring/network_stats";
+    @Value("${openweather.mqtt.topic}")
+    private String networkStatsTopic = "home_monitoring/open_weather";
 
-    public MqttConnectorNetworkStats() {
+    public MqttConnectorOpenWeather() {
         super();
     }
 
-    public void sendNetworkStats(NetworkStats networkStats) {
+    public void sendOpenWeatherData(OpenWeatherData openWeatherData) {
 
         try {
-            log.debug("Send networkStats: " + networkStats);
+            log.debug("Send OpenWeather Data: " + openWeatherData);
             openMqttConnection();
             try {
-                String payload = objectMapper.writeValueAsString(networkStats);
+                String payload = objectMapper.writeValueAsString(openWeatherData);
 
                 sendMessage(networkStatsTopic, payload);
             } catch (JsonProcessingException e) {
                 log.error("Exception", e);
             }
-            log.debug("Send NetworkStats done");
+            log.debug("Send OpenWeather Data done");
 
         } catch (MqttException e) {
             log.error("Exception", e);

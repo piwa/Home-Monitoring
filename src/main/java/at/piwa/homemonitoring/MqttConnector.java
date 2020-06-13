@@ -1,11 +1,9 @@
 package at.piwa.homemonitoring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.paho.client.mqttv3.IMqttClient;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -19,6 +17,17 @@ public abstract class MqttConnector {
 
     protected ObjectMapper objectMapper = new ObjectMapper();
     protected IMqttClient mqttClient;
+
+    public MqttConnector() {
+        objectMapper.registerModule(new JodaModule());
+    }
+
+    protected void sendMessage(String topic, String payload) throws MqttException {
+        MqttMessage msg = new MqttMessage(payload.getBytes());
+        msg.setQos(0);
+        msg.setRetained(true);
+        mqttClient.publish(topic, msg);
+    }
 
     protected void closeMqttConnection() {
         if (mqttClient != null) {

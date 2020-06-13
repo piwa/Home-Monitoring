@@ -20,6 +20,10 @@ public class MqttConnectorTemperature extends MqttConnector {
     @Value("${temperature.mqtt.topic}")
     private String temperatureTopic = "home_monitoring/sensors/temperature";
 
+    public MqttConnectorTemperature() {
+        super();
+    }
+
     public void sendTemperature(List<Temperature> temperatures) {
 
         try {
@@ -29,13 +33,10 @@ public class MqttConnectorTemperature extends MqttConnector {
             for (Temperature temperature : temperatures) {
                 try {
                     log.debug("Send temperature: " + temperature);
-                    objectMapper.registerModule(new JodaModule());
                     String payload = objectMapper.writeValueAsString(temperature);
 
-                    MqttMessage msg = new MqttMessage(payload.getBytes());
-                    msg.setQos(0);
-                    msg.setRetained(true);
-                    mqttClient.publish(temperatureTopic, msg);
+                    sendMessage(temperatureTopic, payload);
+
                     log.debug("Send temperature done");
                 } catch (JsonProcessingException e) {
                     log.error("Exception", e);
