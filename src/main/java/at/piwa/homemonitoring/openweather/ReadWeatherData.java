@@ -43,6 +43,8 @@ public class ReadWeatherData {
                     OpenWeatherData openWeatherData = new OpenWeatherData();
                     openWeatherData.setMeasuredEntity(MeasuredEntity.Temperature);
                     openWeatherData.setTemperature(cwd.getMainData().getTemp());
+
+                    mqttConnectorOpenWeather.sendOpenWeatherData(openWeatherData);
                 }
 
             } catch (APIException e) {
