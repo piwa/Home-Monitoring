@@ -1,9 +1,7 @@
 package at.piwa.homemonitoring.openweather;
 
 
-import at.piwa.homemonitoring.temperature.domain.MeasuredEntity;
-import at.piwa.homemonitoring.temperature.domain.Sensor;
-import at.piwa.homemonitoring.temperature.domain.SensorConnection;
+import at.piwa.homemonitoring.MeasuredEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

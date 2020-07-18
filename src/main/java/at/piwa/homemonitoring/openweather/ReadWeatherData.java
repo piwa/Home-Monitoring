@@ -1,6 +1,6 @@
 package at.piwa.homemonitoring.openweather;
 
-import at.piwa.homemonitoring.temperature.domain.MeasuredEntity;
+import at.piwa.homemonitoring.MeasuredEntity;
 import lombok.extern.slf4j.Slf4j;
 import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;

@@ -1,4 +1,4 @@
-package at.piwa.homemonitoring.temperature.domain;
+package at.piwa.homemonitoring;
 
 import javax.xml.bind.annotation.XmlEnum;
 
@@ -8,6 +8,6 @@ import javax.xml.bind.annotation.XmlEnum;
 @XmlEnum
 public enum MeasuredEntity {
 
-    Temperature
+    Temperature, NetworkTraffic
 
 }

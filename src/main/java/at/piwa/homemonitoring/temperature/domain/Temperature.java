@@ -1,6 +1,7 @@
 package at.piwa.homemonitoring.temperature.domain;
 
 
+import at.piwa.homemonitoring.MeasuredEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 

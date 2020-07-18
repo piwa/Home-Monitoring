@@ -1,5 +1,6 @@
 package at.piwa.homemonitoring.temperature.domain;
 
+import at.piwa.homemonitoring.MeasuredEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
