@@ -1,0 +1,11 @@
+
+#define MQTT_HOST "<IP address>"
+#define MQTT_TEMPERATURE_TOPIC "home_monitoring/sensors/temperature"
+
+#define I2C_TEMPERATURE_SENSOR "I2C Temperature Sensor";
+#define I2C_SENSOR_CONNECTION "I2C"
+#define LOCATION "<Location String>"
+
+#define READING_INTERVAL 900000
+
+#define TEMPERATURE_ADJUSTMENT 2

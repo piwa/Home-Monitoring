@@ -1,0 +1,15 @@
+[Unit]
+Description=Home-Monitoring Service
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/java -jar <path>/home_monitoring.jar \
+--mqtt.uri.tcp=tcp://localhost:1883 \
+--logging.file.name=<path>/home_monitoring.log \
+--sensor.configurations.path=<path>/sensor_configurations.xml &
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

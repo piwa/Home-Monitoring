@@ -1,0 +1,46 @@
+version: '3'
+services:
+  telegraf:
+    image: telegraf
+    volumes:
+        - "<path>/telegraf/:/etc/telegraf:ro"
+    networks:
+        - home_monitoring
+    restart: 
+        always
+           
+  influxdb:
+    image: influxdb
+    ports: 
+        - 8086:8086
+    volumes:
+        - "influxdb:/var/lib/influxdb"
+    networks:
+        - home_monitoring
+    restart: 
+        always
+
+  mosquitto:
+    image: eclipse-mosquitto
+    ports: 
+        - 1883:1883
+        - 9001:9001
+    networks:
+        - home_monitoring
+    restart:
+        always
+        
+  grafana:
+    image: grafana/grafana
+    ports: 
+        - 3000:3000
+    networks:
+        - home_monitoring
+    restart:
+        always        
+        
+networks:
+  home_monitoring:
+  
+volumes:
+  influxdb:

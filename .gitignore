@@ -29,3 +29,8 @@ sensor.properties
 network.properties
 target
 openweather.properties
+
+telegraf.conf
+config.h
+credentials.h
+sensor_configurations.xml
